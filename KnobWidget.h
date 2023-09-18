@@ -27,6 +27,8 @@ private:
     int maxValue;
     int knobAngle;
     bool tracking=false;
+
+    int _lastValue=0;
 public slots:
     void setValue(int newValue);
 };

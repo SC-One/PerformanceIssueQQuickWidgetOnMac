@@ -58,7 +58,10 @@ void KnobWidget::mouseReleaseEvent(QMouseEvent *event)
 void KnobWidget::notifyValue()
 {
     value = static_cast<int>((knobAngle + 360) % 360 * (maxValue / 360.0));
-    emit this->valueChanged(value);
+    if(value != _lastValue){
+        _lastValue = value;
+        emit this->valueChanged(value);
+    }
 
 }
 
