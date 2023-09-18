@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>TestSliderMac</string>
   </property>
-  <layout class="QVBoxLayout" name="mainVlayout" stretch="1,1,5,1,1">
+  <layout class="QVBoxLayout" name="mainVlayout" stretch="1,1,5">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -56,26 +56,6 @@
     </layout>
    </item>
    <item>
-    <widget class="QTextBrowser" name="textBrowser">
-     <property name="font">
-      <font>
-       <pointsize>14</pointsize>
-       <italic>true</italic>
-      </font>
-     </property>
-     <property name="html">
-      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:14pt; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:700;&quot;&gt;Id: Value &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QSlider" name="verticalSlider_2">
@@ -99,62 +79,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
       </widget>
      </item>
      <item>
-      <widget class="QSlider" name="verticalSlider_9">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+      <widget class="QTextBrowser" name="textBrowser">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:14pt; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Segoe UI'; font-size:18pt; font-weight:696;&quot;&gt;Id: Value &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
-     </item>
-     <item>
-      <widget class="QSlider" name="verticalSlider_8">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSlider" name="verticalSlider_6">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSlider" name="verticalSlider_5">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSlider" name="verticalSlider_3">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSlider" name="verticalSlider">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QDial" name="dial_3"/>
-     </item>
-     <item>
-      <widget class="QDial" name="dial"/>
-     </item>
-     <item>
-      <widget class="QDial" name="dial_2"/>
-     </item>
-     <item>
-      <widget class="QDial" name="dial_4"/>
      </item>
     </layout>
    </item>
