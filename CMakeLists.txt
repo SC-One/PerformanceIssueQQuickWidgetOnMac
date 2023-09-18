@@ -17,6 +17,8 @@ set(PROJECT_SOURCES
         TestSliderMac.cpp
         TestSliderMac.h
         TestSliderMac.ui
+        KnobWidget.h
+        KnobWidget.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -74,3 +76,5 @@ install(TARGETS TestSliderMac
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(TestSliderMac)
 endif()
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
