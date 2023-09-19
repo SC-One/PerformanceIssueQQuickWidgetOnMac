@@ -17,8 +17,8 @@ set(PROJECT_SOURCES
         TestSliderMac.cpp
         TestSliderMac.h
         TestSliderMac.ui
-        KnobWidget.h
-        KnobWidget.cpp
+        KnobWidget.h KnobWidget.cpp
+        KnobQML.h KnobQML.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
