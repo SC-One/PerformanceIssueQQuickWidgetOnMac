@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 project(TestSliderMac VERSION 0.1 LANGUAGES CXX)
 
@@ -12,6 +12,28 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets Quick QuickWidgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Quick QuickWidgets)
 
+set(NiceFrameless_dir ${CMAKE_CURRENT_SOURCE_DIR}/Thirdparty/NiceFramelessWindow/framelesswindow)
+
+if(APPLE)
+    set(MySource_files
+        ${NiceFrameless_dir}/framelesswindow.mm
+    )
+    set(THIRD_LIBS
+        "-framework Cocoa"
+    )
+    enable_language(OBJC) # from 3.16 we have objc, objcxx
+    enable_language(OBJCXX)
+endif()
+
+if(WIN32)
+    set(MySource_files
+        ${NiceFrameless_dir}/framelesswindow.cpp
+    )
+    set(THIRD_LIBS
+        Dwmapi
+        user32
+    )
+endif()
 set(PROJECT_SOURCES
         main.cpp
         TestSliderMac.cpp
@@ -19,7 +41,12 @@ set(PROJECT_SOURCES
         TestSliderMac.ui
         KnobWidget.h KnobWidget.cpp
         KnobQML.h KnobQML.cpp
+        
+        ${NiceFrameless_dir}/framelesswindow.h
+        ${MySource_files}
 )
+
+message(${PROJECT_SOURCES})
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(TestSliderMac
@@ -50,6 +77,8 @@ target_link_libraries(TestSliderMac PRIVATE
   Qt${QT_VERSION_MAJOR}::Widgets
   Qt${QT_VERSION_MAJOR}::Quick
   Qt${QT_VERSION_MAJOR}::QuickWidgets
+
+  ${THIRD_LIBS}
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

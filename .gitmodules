@@ -1,0 +1,5 @@
+[submodule "Thirdparty/NiceFramelessWindow"]
+	path = Thirdparty/NiceFramelessWindow
+	url = https://github.com/Bringer-of-Light/Qt-Nice-Frameless-Window.git
+[submodule "Thirdparty\\NiceFramelessWindow"]
+	url = https://github.com/SC-One/Qt-Nice-Frameless-Window.git
