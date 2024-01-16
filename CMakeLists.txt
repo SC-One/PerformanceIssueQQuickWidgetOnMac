@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets Quick QuickWidgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Quick QuickWidgets)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Widgets Quick QuickWidgets Concurrent)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets Quick QuickWidgets Concurrent)
 
 set(NiceFrameless_dir ${CMAKE_CURRENT_SOURCE_DIR}/Thirdparty/NiceFramelessWindow/framelesswindow)
 
@@ -44,6 +44,9 @@ set(PROJECT_SOURCES
         
         ${NiceFrameless_dir}/framelesswindow.h
         ${MySource_files}
+
+        SameTableWidget.h SameTableWidget.cpp SameTableWidget.ui
+        CustomModel.h CustomModel.cpp
 )
 
 message(${PROJECT_SOURCES})
@@ -77,6 +80,8 @@ target_link_libraries(TestSliderMac PRIVATE
   Qt${QT_VERSION_MAJOR}::Widgets
   Qt${QT_VERSION_MAJOR}::Quick
   Qt${QT_VERSION_MAJOR}::QuickWidgets
+  Qt${QT_VERSION_MAJOR}::Concurrent
+
 
   ${THIRD_LIBS}
 )

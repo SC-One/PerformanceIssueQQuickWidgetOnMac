@@ -8,6 +8,7 @@
 #include <KnobWidget.h>
 #include <QCheckBox>
 #include <KnobQML.h>
+#include "SameTableWidget.h"
 
 static const QString Formatted = "%1: %2";
 TestSliderMac::TestSliderMac(QWidget *parent)
@@ -34,6 +35,8 @@ TestSliderMac::TestSliderMac(QWidget *parent)
         QScrollBar *sb = ui->textBrowser->verticalScrollBar();
         sb->setValue(sb->maximum());
     });
+    auto y= new SameTableWidget(this);
+    ui->mainVlayout->insertWidget(0, y ,3);
     ui->mainVlayout->insertWidget(0, _waveform, 3);
     _waveform->setResizeMode(QQuickWidget::ResizeMode::SizeRootObjectToView);
 }
