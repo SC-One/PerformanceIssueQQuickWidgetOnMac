@@ -71,10 +71,12 @@ void CustomModel::generateRandomData(int rows ,int cols) {
     _resumeLast = false;
     _lastFuture.waitForFinished();
     _resumeLast = true;
+    removeRows(0,rowCount());
+    setRowCount(rows);
+    setColumnCount(cols);
     _lastFuture = QtConcurrent::run([=]() {
         for (int row = 0; (row < rows) && _resumeLast; ++row) {
             QList<QStandardItem*> rowItems;
-            emit insertNewRow(row);
 
             for (int col = 0; col < cols; ++col) {
                 QStandardItem *item = new QStandardItem(CustomModel::generateRandomText());

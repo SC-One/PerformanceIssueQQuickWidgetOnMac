@@ -21,9 +21,6 @@ public:
   ~TestSliderMac();
 
 private:
-  void connectToText(QLayout *layout);
-
-private:
   Ui::TestSliderMac *ui;
   QQuickWidget *_waveform;
 };
