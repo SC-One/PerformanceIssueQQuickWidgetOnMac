@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>TestPureQMLTable/TestPureQMLTable.qml</file>
+        <file>TestPureQMLTable/CorrectedComp.qml</file>
+    </qresource>
+</RCC>

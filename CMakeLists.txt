@@ -47,6 +47,7 @@ set(PROJECT_SOURCES
 
         SameTableWidget.h SameTableWidget.cpp SameTableWidget.ui
         CustomModel.h CustomModel.cpp
+        TestPureQMLTable/CustomQmlModel.h TestPureQMLTable/CustomQmlModel.cpp
 )
 
 message(${PROJECT_SOURCES})
@@ -71,6 +72,7 @@ else()
         add_executable(TestSliderMac
             ${PROJECT_SOURCES}
             res.qrc
+            PureQML.qrc
         )
     endif()
 endif()

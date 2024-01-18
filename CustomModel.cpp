@@ -3,6 +3,8 @@
 #include <QtConcurrent>
 #include<QThread>
 
+constexpr static auto start_ROLE = Qt::UserRole;
+
 CustomModel::CustomModel(QObject *parent) : QStandardItemModel(parent) {
 
     qRegisterMetaType<QList<QList<QStandardItem*>>>("QList<QList<QStandardItem*>>");
@@ -27,16 +29,30 @@ CustomModel::CustomModel(QObject *parent) : QStandardItemModel(parent) {
     });
     connect(this,&CustomModel::setNewItem , this,
             [this](int row, QList<QStandardItem*> items){
-//        qDebug()<<rowCount();
         for (int col = 0; col < items.size(); ++col) {
             setItem(row, col, items[col]);
         }
     });
+    updateRoleNames();
+}
+
+CustomModel::~CustomModel() {
+    stopThread();
 }
 
 void CustomModel::removeAndRegenerateRows(int rows , int cols) {
     removeRows(0, rowCount());
     generateRandomData(rows, cols);
+    qDebug()<<"removeAndRegenerateRows"<<rows<<cols;
+}
+
+QHash<int, QByteArray> CustomModel::myRoleNames() const {
+    QHash<int, QByteArray> roles;
+    // Define roles for each column in your model
+    for (int col = 0; col < columnCount(); ++col) {
+        roles[start_ROLE + col] = QByteArrayLiteral("column") + QByteArray::number(col);
+    }
+    return roles;
 }
 
 void CustomModel::setFontForColumn(int column, const QFont &font) {
@@ -67,13 +83,35 @@ QString CustomModel::generateRandomText() {
     return randomText;
 }
 
-void CustomModel::generateRandomData(int rows ,int cols) {
+void CustomModel::stopThread() {
     _resumeLast = false;
     _lastFuture.waitForFinished();
+}
+
+void CustomModel::updateRoleNames() {
+    auto roles = myRoleNames();
+    setItemRoleNames(roles);
+
+    QMap<int, QString> res;
+    QHashIterator<int, QByteArray> i(roles);
+    while (i.hasNext()) {
+        i.next();
+        if(i.key() > start_ROLE)
+            res[i.key()] = i.value();
+    }
+    setRoleNamesForQML(res.values());
+}
+
+void CustomModel::generateRandomData(int rows ,int cols) {
+    stopThread();
     _resumeLast = true;
     removeRows(0,rowCount());
     setRowCount(rows);
+    auto const FIXED_COL_COUNT = columnCount();
     setColumnCount(cols);
+    if(FIXED_COL_COUNT != cols) {
+        updateRoleNames();
+    }
     _lastFuture = QtConcurrent::run([=]() {
         for (int row = 0; (row < rows) && _resumeLast; ++row) {
             QList<QStandardItem*> rowItems;
@@ -86,11 +124,25 @@ void CustomModel::generateRandomData(int rows ,int cols) {
                 if ((col - 2) % 3 == 0) {
                     item->setFont(CustomModel::generateRandomFont());
                 }
+
             }
-            if(!_resumeLast)
+            if (!_resumeLast)
                 break;
             QThread::msleep(10);
-            emit setNewItem(row,rowItems);
+            emit setNewItem(row, rowItems);
         }
     });
+}
+
+QStringList CustomModel::roleNamesForQML() const
+{
+    return _roleNamesForQML;
+}
+
+void CustomModel::setRoleNamesForQML(const QStringList &newRoleNamesForQML)
+{
+    if (_roleNamesForQML == newRoleNamesForQML)
+        return;
+    _roleNamesForQML = newRoleNamesForQML;
+    emit roleNamesForQMLChanged();
 }
